@@ -66,6 +66,10 @@ Q4_Ans = [Q3_Ans(3)/6];
 %--------------------------------------------------------------------------
 % Q5 -- What is the value of the 3rd rand_nums?
 % Please write code for this answer rather than an integer value
+
+rng(189); % use seed 189 throughout this hw
+rand_nums = randperm(6);
+
 Q5_Ans = [rand_nums(3)];
 
 %--------------------------------------------------------------------------
@@ -73,6 +77,14 @@ Q5_Ans = [rand_nums(3)];
 % Follow the instructions and use the code given to you in the Google Doc 
 % to create your own for loop which sets indices into the variables
 % trainIdx and valIdx
+
+[n_channel, n_time, n_sample] = size(EEGL_train{1, 1});
+randIdx = randperm(n_sample);
+k = 6;
+bin_size = n_sample / k;
+trainIdx = cell(k, 1);
+valIdx = cell(k, 1);
+randIdx = reshape(randIdx, k, bin_size);
 
 for i = 1:k
     valIdx{i}=randIdx(i,:);
@@ -163,7 +175,7 @@ end
 %
 
 % Q8 -- What is the dimensionality of csp_filter? 
-Q8_ANS = [6*22];
+Q8_ANS = [size(csp_filter)];
 
 % Q9 -- In csp_filter, are the filters defined by the rows or columns?
 % For this question, index Q8_ANS with the appropriate value.
