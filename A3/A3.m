@@ -9,13 +9,13 @@
 % the assignment.
 %
 %
-VAR_NAME = "First Last"; %" rather than ' for apostrophe last names
-VAR_PID  = 'A000000';
+VAR_NAME = "Jing Lang"; %" rather than ' for apostrophe last names
+VAR_PID  = 'A14906233';
 
 %--------------------------------------------------------------------------
 % Q1 -- What are the four classes present in this dataset?
 % Change the string to your answer.
-Q1_ANS = 'Enter your answer here as a string.'; % 
+Q1_ANS = 'left hand, right hand, both feet, and tongue'; % 
 
 %--------------------------------------------------------------------------
 % Q2 -- Simple "Cross-Validation"
@@ -35,10 +35,10 @@ i = 1;
 %disp(i)
 %disp(Q2_data(Q2_data ~= i)) % This is called logical indexing
 
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
+for i = 1:5
+    disp(i)
+    disp(Q2_data(Q2_data ~= i))
+end
 
 % Output should be:
 %1
@@ -56,17 +56,17 @@ i = 1;
 % Q3 -- Using the code given in the Google Doc as a template, set Q3_Ans to
 %       be the dimensionality of EEGR_train
 % Please write the code rather than defining a vector of values
-Q3_Ans = []; % Put your answer here
+Q3_Ans = [size(EEGL_train{1, 1})]; % Put your answer here
 
 %--------------------------------------------------------------------------
 % Q4 -- When k=6, how many samples are in each bin?
 % Please write code for this answer rather than an integer value
-Q4_Ans = [];
+Q4_Ans = [Q3_Ans(3)/6];
 
 %--------------------------------------------------------------------------
 % Q5 -- What is the value of the 3rd rand_nums?
 % Please write code for this answer rather than an integer value
-Q5_Ans = [];
+Q5_Ans = [rand_nums(3)];
 
 %--------------------------------------------------------------------------
 % Q6 -- Cross Validation Indices
@@ -74,17 +74,22 @@ Q5_Ans = [];
 % to create your own for loop which sets indices into the variables
 % trainIdx and valIdx
 
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
-% WRITE YOUR FOR LOOP HERE
+for i = 1:k
+    valIdx{i}=randIdx(i,:);
+    part_1 = randIdx(1:i-1,:);
+    part_2 = randIdx(i+1:k,:);
+    part_1 = reshape(part_1,1,[]);
+    part_2 = reshape(part_2,1,[]);
+    cated = cat(2,part_1,part_2);
+    trainIdx{i}= cated;
+end
 
 %--------------------------------------------------------------------------
 % Q7 -- Set the value of Q7_ANS to the number of spatial filters we choose
 %       from each class
 % The answer should just be an integer
 
-Q7_ANS = []; % Integer answer here
+Q7_ANS = [3]; % Integer answer here
 
 %--------------------------------------------------------------------------
 % Q8 & Q9 -- Run the main analysis and then answer the question below
@@ -158,15 +163,15 @@ end
 %
 
 % Q8 -- What is the dimensionality of csp_filter? 
-Q8_ANS = [];
+Q8_ANS = [6*22];
 
 % Q9 -- In csp_filter, are the filters defined by the rows or columns?
 % For this question, index Q8_ANS with the appropriate value.
 % row = Q8_ANS(1);
 % col = Q8_ANS(2);
-Q9_ANS = Q8_ANS(0); % Modify the integer from 0 to 1 or 2
+Q9_ANS = Q8_ANS(2); % Modify the integer from 0 to 1 or 2
 
 %--------------------------------------------------------------------------
 % Q10 -- What is the mean accuracy of every subject?
 % Please write your answer using code rather than a float
-Q10_ANS = [];
+Q10_ANS = [mean(accuracy)];
