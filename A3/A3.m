@@ -186,4 +186,4 @@ Q9_ANS = Q8_ANS(2); % Modify the integer from 0 to 1 or 2
 %--------------------------------------------------------------------------
 % Q10 -- What is the mean accuracy of every subject?
 % Please write your answer using code rather than a float
-Q10_ANS = [mean(accuracy)];
+Q10_ANS = [mean(accuracy.')];
